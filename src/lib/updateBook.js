@@ -1,15 +1,13 @@
 'use strict';
 
-const client = require('./pg');
+// const client = require('./pg');
 const handleError = require('../middleware/errors/handleError.js');
 
-function updateBook(request, response) {
+function updateBook(request, response, next) {
   let { title, author, isbn, image_url, description, bookshelf_id } = request.body;
-  // let SQL = `UPDATE books SET title=$1, author=$2, isbn=$3, image_url=$4, description=$5, bookshelf=$6 WHERE id=$7;`;
-  let SQL = `UPDATE books SET title=$1, author=$2, isbn=$3, image_url=$4, description=$5, bookshelf_id=$6 WHERE id=$7;`;
   let values = [title, author, isbn, image_url, description, bookshelf_id, request.params.id];
 
-  client.query(SQL, values)
+  request.selectedModel.put(values)
     .then(response.redirect(`/books/${request.params.id}`))
     .catch(err => handleError(err, response));
 }

@@ -1,13 +1,12 @@
 'use strict';
 
-const client = require('./pg');
+// const client = require('../models/pg');
 const handleError = require('../middleware/errors/handleError.js');
 
 
-function getBooks(request, response) {
-  let SQL = 'SELECT * FROM books;';
+function getBooks(request, response, next) {
 
-  return client.query(SQL)
+  return request.selectedModel.get()
     .then(results => {
       if (results.rows.rowCount === 0) {
         response.render('pages/searches/new');

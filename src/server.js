@@ -4,26 +4,46 @@ require('dotenv').config();
 
 // Application Dependencies
 const express = require('express');
-// const pg = require('pg');
-// const superagent = require('superagent');
-const methodOverride = require('./middleware/methodOverride');
+const methodOverride = require('./middleware/methodOverride.js');
 const router = require('./routes.js');
+const handleError = require('./middleware/errors/handleError.js');
 
 // Application Setup
 const app = express();
-const PORT = process.env.PORT;
+// const PORT = process.env.PORT;
 
 // Database Setup
+
+
+// Application Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.use(methodOverride);
+
+
+// Set the view engine for server-side templating
+app.set('view engine', 'ejs');
+
+// API Routes
+app.use(router);
+app.get('*', (request, response) => response.status(404).send('This route does not exist'));
+app.use(handleError);
+
+
+module.exports = {
+  server: app,
+  start: (port) => app.listen(port, () => console.log(`Listening on port: ${port}`)),
+};
+
+
+
+// const pg = require('pg');
+// const superagent = require('superagent');
+
 // const client = new pg.Client(process.env.DATABASE_URL);
 // client.connect();
 // client.on('error', err => console.error(err));
-
-// Application Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
-
-app.use(methodOverride);
-const handleError = require('./middleware/errors/handleError.js');
 
 //Application functions
 // const getBooks = require('./lib/getBooks.js');
@@ -34,11 +54,6 @@ const handleError = require('./middleware/errors/handleError.js');
 // const updateBook = require('./lib/updateBook.js');
 // const deleteBook = require('./lib/deleteBook.js');
 
-// Set the view engine for server-side templating
-app.set('view engine', 'ejs');
-
-// API Routes
-
 // app.get('/', getBooks);
 // app.post('/searches', createSearch);
 // app.get('/searches/new', newSearch);
@@ -46,11 +61,6 @@ app.set('view engine', 'ejs');
 // app.post('/books', createBook);
 // app.put('/books/:id', updateBook);
 // app.delete('/books/:id', deleteBook);
-app.use(router);
-
-app.get('*', (request, response) => response.status(404).send('This route does not exist'));
-
-
 
 // HELPER FUNCTIONS
 
@@ -173,11 +183,3 @@ app.get('*', (request, response) => response.status(404).send('This route does n
 //     .then(response.redirect('/'))
 //     .catch(err => handleError(err, response));
 // }
-
-app.use(handleError);
-
-
-module.exports = {
-  server: app,
-  start: app.listen(PORT, () => console.log(`Listening on port: ${PORT}`)),
-};

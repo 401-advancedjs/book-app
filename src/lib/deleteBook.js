@@ -1,13 +1,12 @@
 'use strict';
 
-const client = require('./pg');
+// const client = require('./pg');
 const handleError = require('../middleware/errors/handleError.js');
 
-function deleteBook(request, response) {
-  let SQL = 'DELETE FROM books WHERE id=$1;';
+function deleteBook(request, response, next) {
   let values = [request.params.id];
 
-  return client.query(SQL, values)
+  return request.selectedModel.delete(values)
     .then(response.redirect('/'))
     .catch(err => handleError(err, response));
 }
