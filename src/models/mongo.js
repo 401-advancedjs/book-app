@@ -33,21 +33,20 @@ class Mongo{
       return new Promise(resolve => resolve(result));
     });
   }
-
-  createShelf(shelf) {
-
   
+  //TODO: Finish refactoring this method
+  createShelf(shelf) {
     // let normalizedShelf = shelf.toLowerCase();
     // let SQL1 = `SELECT id from bookshelves where name=$1;`;
     // let values1 = [normalizedShelf];
-    // return this.bookSchema.find(shelf.toLowerCase()).then(result => {
-      // // if(result.length){
-      //   result = {rows: result, rowCount: result.length};      return new Promise(resolve => resolve(result));
-      // }else{
-      // return this.bookSchema(shelf)
-      // }
-    // }
-
+    return this.bookSchema.find(shelf.toLowerCase()).then(result => {
+      if(result.length){
+        result = {rows: result, rowCount: result.length};      
+        return new Promise(resolve => resolve(result));
+      }else{
+        return this.bookSchema(shelf);
+      }
+    });
     // return client.query(SQL1, values1)
     //   .then(results => {
     //     if (results.rowCount) {
@@ -75,6 +74,14 @@ class Mongo{
       result = {rows: result, rowCount: result.length};
       return new Promise(resolve => resolve(result));
     });
+  }
+
+  //TODO: Finish refactoring this method
+  getBookshelves(){
+  // // let SQL = 'SELECT DISTINCT bookshelf FROM books ORDER BY bookshelf;';
+  // let SQL = 'SELECT DISTINCT id, name FROM bookshelves ORDER BY name;';
+    return this.bookSchema.find();
+  // return client.query(SQL);
   }
 }
 

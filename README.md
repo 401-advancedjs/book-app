@@ -1,20 +1,17 @@
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB
 =================================================
 
-## Project Name
+## Book App
 
-### Author: Student/Group Name
+### Author: Melissa Stock
 
 ### Links and Resources
-* [submission PR](http://xyz.com)
-* [travis](http://xyz.com)
-* [back-end](http://xyz.com) (when applicable)
-* [front-end](http://xyz.com) (when applicable)
+* [submission PR](https://github.com/401-advancedjs/book-app/pull/1)
+* [travis](https://www.travis-ci.com/401-advancedjs/book-app)
+* [front-end](https://mongo-book-app.herokuapp.com/)
 
 #### Documentation
-* [api docs](http://xyz.com) (API servers)
-* [jsdoc](http://xyz.com) (Server assignments)
-* [styleguide](http://xyz.com) (React assignments)
+* [mongo docs](https://mongoosejs.com/docs/guide.html) (API servers)
 
 ### Modules
 #### `modulename.js`
@@ -30,6 +27,8 @@ Usage Notes or examples
 #### `.env` requirements
 * `PORT` - Port Number
 * `MONGODB_URI` - URL to the running mongo instance/db
+* `DATABASE_URL` - URL to the running postgres instance/db
+* `ACTIVE_DB` - mongo for mongodb, or blank for postgree db
 
 #### Running the app
 * `npm start`
