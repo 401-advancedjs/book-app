@@ -5,7 +5,6 @@ const handleError = require('../middleware/errors/handleError.js');
 
 
 function getBooks(request, response, next) {
-
   return request.selectedModel.get()
     .then(results => {
       if (results.rows.rowCount === 0) {

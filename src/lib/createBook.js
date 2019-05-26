@@ -1,9 +1,6 @@
 'use strict';
 
-// const createShelf = require('./createShelf.js');
-// const client = require('./pg');
 const handleError = require('../middleware/errors/handleError.js');
-
 
 function createBook(request, response, next) {
   console.log(request.body.bookshelf);
@@ -16,7 +13,6 @@ function createBook(request, response, next) {
         .then(result => response.redirect(`/books/${result.rows[0].id}`))
         .catch(err => handleError(err, response));
     });
-
 }
 
 module.exports = createBook;

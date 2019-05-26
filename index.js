@@ -5,7 +5,7 @@ require('dotenv').config();
 const currentDB = process.env.ACTIVE_DB;
 
 switch (currentDB){
-case 'mongoDB': {
+case 'mongo': {
   console.log('using mongoDB');
   const mongoose = require('mongoose');
       

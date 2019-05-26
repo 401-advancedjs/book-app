@@ -1,8 +1,8 @@
 'use strict';
 
-function modelFinder(req, res, next){
+function modelFinder(request, response, next){
   const activeDB = process.env.ACTIVE_DB;
-  req.selectedModel = require(`../models/${activeDB}.js`);
+  request.selectedModel = require(`../models/${activeDB}.js`);
   next();
 }
 
