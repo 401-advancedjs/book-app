@@ -4,7 +4,7 @@
   "description": "Application that will allow users to upload and review books",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node src/server.js",
     "watch": "nodemon server.js"
   },
   "keywords": [],
