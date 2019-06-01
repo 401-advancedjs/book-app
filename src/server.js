@@ -10,10 +10,6 @@ const handleError = require('./middleware/errors/handleError.js');
 
 // Application Setup
 const app = express();
-// const PORT = process.env.PORT;
-
-// Database Setup
-
 
 // Application Middleware
 app.use(express.json());
